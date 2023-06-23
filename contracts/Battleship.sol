@@ -3,8 +3,9 @@ pragma solidity ^0.5.0;
 contract Battleship{
     address public giocatore1;
     address public giocatore2;
+    //mapping che associa un valore booleano a ciascun indirizzo Ethereum
     mapping(addmod => bool) public navePiazzata;
-    mapping(address => mapping(uint8 => mapping(uint8 => bool))) public grid;
+    mapping(address => mapping(uint8 => mapping(uint8 => bool))) public griglia;
 
 
     constructor() public {
@@ -23,12 +24,26 @@ contract Battleship{
         giocatore2 = msg.sender;
 
         } 
-    function validaPosizioneNave() internal view returns (bool) {
-
-    }
+     function piazzaNavi(uint8 x, uint8 y) public soloGiocatori {
+        require(!navePiazzata[msg.sender], "Hai già piazzato le navi");
+        require(x < 10 && y < 10, "Coordinate non valide");
+        require(!griglia[msg.sender][x][y], "Posizione già occupata");
         
+        griglia[msg.sender][x][y] = true;
+    }
         
         //uint va bene per un 8x8 8bit da 0 a 7
     function attaccoPosizione(uint8 x,uint8 y) public soloGiocatori {
-        require(gameRules.)
+        require(navePiazzata[giocatore1] && navePiazzata[giocatore2], "Attendi il piazzamento delle navi da entrambi i giocatori");
+        require(x < 10 && y < 10, "Coordinate non valide");
+        require(!griglia[msg.sender][x][y], "Hai già attaccato questa posizione");
+        
+    }
+
+    function impostaNaviPosizionate() public soloGiocatori  {
+        require(!navePiazzata[msg.sender],"hai segnalato che hai piazzato una nave");
+        require(giocatore1 != address(0) && giocatore2 != address(0),"attendi che entrambi i player si uniscano");
+
+        navePiazzata[msg.sender] = true;
+        
     }
