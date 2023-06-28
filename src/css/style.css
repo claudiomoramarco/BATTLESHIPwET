@@ -1,0 +1,54 @@
+body {  
+    margin: 0;
+    background-color: bisque;
+    overflow: hidden;
+    
+}
+
+*, *:before, *:after {
+    font-family: 'Belanosima', sans-serif;
+    box-sizing: border-box;
+}
+.splash-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 66vh;
+}
+
+.splash-titolo {
+    font-family: 'Belanosima', sans-serif;   
+    font-size: 10rem;
+}
+
+.btn{
+    background-color: hsl(40,100%,50%);
+    padding: .5em 1em;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: .7em;
+    color: #333;
+
+}
+
+.immaginenave{
+    position:absolute;
+    bottom:5vh;
+    left: 20vw;
+}
+
+.splash-btn{
+    font-size: 2rem;
+    margin-left: 2rem;
+}
+
+.splash-btn:first-child{
+    margin-left: 0;
+}
+
+.splash-btn:first-child {
+    margin-left: 0;
+}
