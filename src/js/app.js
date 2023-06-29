@@ -1,7 +1,7 @@
-App = {  //global app oggetto per la nostra applicazione,carica il pet data in un init e poi chiama la funzione initweb3()
+/*App = {  //global app oggetto per la nostra applicazione,carica il pet data in un init e poi chiama la funzione initweb3()
   web3Provider: null,
   contracts: {},
-
+  
   init: async function() {
     // Load pets.
     $.getJSON('../pets.json', function(data) {
@@ -49,7 +49,7 @@ web3 = new Web3(App.web3Provider);
   },
 
   initContract: function() {
-    $.getJSON('Adoption.json', function(data) {
+    $.getJSON('Battleship.json', function(data) {
       // Get the necessary contract artifact file and instantiate it with @truffle/contract
       var AdoptionArtifact = data;
       App.contracts.Adoption = TruffleContract(AdoptionArtifact);
@@ -73,7 +73,7 @@ web3 = new Web3(App.web3Provider);
     /*
      * Replace me...
      */
-  },
+  /*}
 
   handleAdopt: function(event) {
     event.preventDefault();
@@ -83,7 +83,7 @@ web3 = new Web3(App.web3Provider);
     /*
      * Replace me...
      */
-  }
+/*  }
 
 };
 
@@ -92,3 +92,27 @@ $(function() {
     App.init();
   });
 });
+*/
+
+
+
+
+//da qui battleship poi cambieremo il codice di sopra
+
+const flipButton = document.querySelector('#flip-button')
+const optionContainer = document.querySelector('.option-container')
+
+//funzione per flippare le navi 
+
+function flip() {
+  const opzioneNavi = Array.from(optionContainer.children) 
+    opzioneNavi.forEach(opzioneNave =>  opzioneNave.style.transform = 'rotate(90deg)')
+  }
+
+
+//quando clicco voglio essenzialmente chiamare questa funzione flip
+//prendo i child della option-container che sarebbereo le navi 
+
+flipButton.addEventListener('click',flip)
+
+

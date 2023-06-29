@@ -17,14 +17,21 @@
   <div id="gameboard-container"></div>
   <!-- div per le opzioni, tutte le barche che possiamo piazzare-->
  
-    <!-- div assicurarsi che tutte le barche hanno un class name--> 
-    <!--draggable per essere draggate le navi-->
-  <div class="option-container"></div>
-    <div class="nave1-preview" draggable="true"></div>
-    <div class="nave2-preview" draggable="true"></div>
-    <div class="nave3-preview" draggable="true"></div>
-    <div class="nave4-preview" draggable="true"></div>
-    <div class="nave5-preview" draggable="true"></div>
+    <!-- Questi <div> contengono le opzioni delle navi che possono essere trascinate sulla tavola da gioco.
+       Ognuno ha una classe specifica per il CSS e l'attributo draggable="true" per consentire il trascinamento.-->
+<div class="option-container">
+  <div class="nave1-preview" draggable="true"></div>
+  <div class="nave2-preview" draggable="true"></div>
+  <div class="nave3-preview" draggable="true"></div>
+  <div class="nave4-preview" draggable="true"></div>
+  <div class="nave5-preview" draggable="true"></div>
+</div>
+
+<button id="flip-button">Ruota Navi</button>
+<button id="avvia-partita">Avvia Partita</button>
+<script src="js/app.js"></script>
+
+
 
 </body>
 </html>

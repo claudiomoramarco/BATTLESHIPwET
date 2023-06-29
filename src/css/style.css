@@ -78,18 +78,26 @@ body {
 
 }
 
-.option-container{
+.option-container {
     width: 300px;
     height: 150px;
+    margin: 30px ;
     display: flex;
-    background-color: aquamarine;
     justify-content: center;
-    
-
-}
+    align-items: center;
+    background-color: #fff;
+    border: 2px solid #2196f3;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
 .option-container:hover{
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 145, 255, 0.26);
 }
+
+.option-container .rotated {
+    transform: rotate(90deg);
+  }
 
 .nave1-preview{
     background-color: firebrick;
@@ -97,28 +105,47 @@ body {
     height: 10px;
     margin: 3px;
 }
+.nave1-preview:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
 
 .nave2-preview{
     background-color: red;
     width: 30px;
     height: 10px;
     margin: 3px;
+    display: flex;
 }
+.nave2-preview:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
 .nave3-preview{
     background-color: chocolate;
     width: 40px;
     height: 10px;
     margin: 3px;
 }
+.nave3-preview:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
 .nave4-preview{
     background-color: crimson;
     width: 50px;
     height: 10px;
     margin: 3px;
 }
+.nave4-preview:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
 .nave5-preview{
     background-color: darkorange;
     width: 50px;
     height: 10px;
     margin: 3px;
+}
+.nave5-preview:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
