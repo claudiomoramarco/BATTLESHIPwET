@@ -103,11 +103,19 @@ const flipButton = document.querySelector('#flip-button')
 const optionContainer = document.querySelector('.option-container')
 
 //funzione per flippare le navi 
+let rotato = false;
 
 function flip() {
   const opzioneNavi = Array.from(optionContainer.children) 
+
+  if (rotato) {
+    opzioneNavi.forEach(opzioneNave =>  opzioneNave.style.transform = 'none')
+  }
+  else  {
     opzioneNavi.forEach(opzioneNave =>  opzioneNave.style.transform = 'rotate(90deg)')
   }
+  rotato = !rotato;
+}
 
 
 //quando clicco voglio essenzialmente chiamare questa funzione flip
