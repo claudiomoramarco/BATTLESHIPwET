@@ -47,14 +47,15 @@ body {
     
 }
 
-.splash-btn{
+.splash-btn {
     font-size: 2rem;
     margin-left: 2rem;
     color: aliceblue;
     transition-duration: 0.3s;
-    -webkit-transition-property: box-shadow, trasnform;
-
+    transition-property: box-shadow, transform;
+    -webkit-transition-property: box-shadow, transform;
 }
+
 
 .splash-btn:first-child{
     margin-left: 0;
@@ -64,12 +65,12 @@ body {
     margin-left: 0;
 }
 
-.btn:hover,.btn:focus,.btn:active {
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    -webkit-trasform scale(1.1);
+.btn:hover, .btn:focus, .btn:active {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    -webkit-transform: scale(1.1);
     transform: scale(1.1);
-
 }
+
 
 .container {
     display: flex;
@@ -77,6 +78,27 @@ body {
     width: 100%;
 
 }
+#gamesboard-container{
+    
+    display: flex;
+}
+  
+  .game-board {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    width: 300px;
+    height: 300px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    background-color: #fff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.24);
+    margin-right: 20px; /* Aggiungi lo spazio tra le griglie */
+  }
+  
+  .cell {
+    border: 0.2px solid rgba(0, 0, 0, 0.12);
+  }
+  
 
 .option-container {
     width: 300px;

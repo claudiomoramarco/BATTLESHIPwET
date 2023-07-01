@@ -98,10 +98,10 @@ $(function() {
 
 
 //da qui battleship poi cambieremo il codice di sopra
-
+const gamesBoardContainer = document.querySelector('#gamesboard-container')
 const flipButton = document.querySelector('#flip-button')
 const optionContainer = document.querySelector('.option-container')
-
+//opzioni per rotazione delle navi 
 //funzione per flippare le navi 
 let rotato = false;
 
@@ -123,4 +123,33 @@ function flip() {
 
 flipButton.addEventListener('click',flip)
 
+//creazione della Board di gioco
 
+const width = 10;
+const container = document.getElementById('gamesboard-container');
+
+function creaBoard(color,user) {
+  //div salvato su questa const
+  const gameBoardContainer = document.createElement('div');
+  gameBoardContainer.classList.add('game-board');
+  gamesBoardContainer.append(gameBoardContainer)
+  
+
+  for (let i = 0; i < width; i++) {
+    for (let j = 0; j < width; j++) {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+      cell.id = `${i}-${j}`; //ho unito gli id
+      gameBoardContainer.appendChild(cell);
+      gameBoardContainer.style.backgroundColor = color;
+      gameBoardContainer.id = user
+    }
+  }
+  
+  
+  
+ 
+}
+
+creaBoard('lightblue','giocatore1') 
+creaBoard('darkblue', 'giocatore2')
