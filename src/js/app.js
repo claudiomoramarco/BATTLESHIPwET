@@ -259,6 +259,9 @@ function dragLeave() {
 }
 
 function dragDrop() {
+  if(draggedNave === null) {
+    return //Skip the code if draggedNave is null
+  }
   let naveNameWithLastId = draggedNave.lastChild.id
   let naveClass = naveNameWithLastId.slice(0,-2)
   console.log(naveClass)
@@ -345,21 +348,28 @@ let cpuNavetreCount = 0
 let cpuNavequattroCount = 0
 let cpuNavecinqueCount = 0
 
-function computerGo () {
-  let random = Math.floor(Math.random() * userSquares.length)
-  if(!userSquares[random].classList.add('boom')) {
-    userSquares[random].classList.add('boom')
-    if (userSquares[random].classList.contains('naveuno')) cpuNaveunoCount++
-    if (userSquares[random].classList.contains('navedue')) cpuNavedueCount++
-    if (userSquares[random].classList.contains('navetre')) cpuNavetreCount++
-    if (userSquares[random].classList.contains('navequattro')) cpuNavequattroCount++
-    if (userSquares[random].classList.contains('navecinque')) cpuNavecinqueCount++
-    checkForWins()
+function computerGo() {
+  let random = Math.floor(Math.random() * userSquares.length);
+  if (!userSquares[random].classList.contains('boom')) {
+    userSquares[random].classList.add('boom');
+    if (userSquares[random].classList.contains('naveuno')) cpuNaveunoCount++;
+    if (userSquares[random].classList.contains('navedue')) cpuNavedueCount++;
+    if (userSquares[random].classList.contains('navetre')) cpuNavetreCount++;
+    if (userSquares[random].classList.contains('navequattro')) cpuNavequattroCount++;
+    if (userSquares[random].classList.contains('navecinque')) cpuNavecinqueCount++;
+    checkForWins();
+  } else {
+    computerGo();
+    return; // Aggiungi questa riga per terminare la funzione dopo la chiamata ricorsiva
+  }
+  currentPlayer = 'user';
+  turnDisplay.innerHTML = 'Your Go';
 
-  } else computerGo()
-  currentPlayer = 'user'
-  turnDisplay.innerHTML = 'Your Go'
+  setTimeout(() => {
+    playGame(); // Chiamata ricorsiva ritardata
+  }, 1000);
 }
+
 
 function checkForWins() {
   if(naveunoCount === 2) {
@@ -408,7 +418,7 @@ function checkForWins() {
     
   }
 
-  if ((cpunaveunoCount + cpunavedueCount + cpunavetreCount + cpunavequattroCount + cpunavecinqueCount) === 50 ) {
+  if ((cpuNaveunoCount + cpuNavedueCount + cpuNavetreCount + cpuNavequattroCount + cpuNavecinqueCount) === 50 ) {
     infoDisplay.innerHTML = 'Hai perso, ha vinto il pc'
     giocoTerminato()
   } 
