@@ -34,18 +34,6 @@ body {
 
 }
 
-.nave{
-    position:absolute;
-   
-    transform: rotateY(180deg);
-    pointer-events: none;
-    opacity: .20;
-    margin-top: 0px;
-    margin-bottom: 250px;
-    margin-left: 100px;
-    margin-right: 100px;
-    
-}
 
 .splash-btn {
     font-size: 2rem;
@@ -71,103 +59,188 @@ body {
     transform: scale(1.1);
 }
 
+.navi{
+    position:absolute;
+   
+    transform: rotateY(180deg);
+    pointer-events: none;
+    opacity: .20;
+    margin-top: 0px;
+    margin-bottom: 250px;
+    margin-left: 100px;
+    margin-right: 100px;
+    
+}
+
 
 .container {
     display: flex;
-    justify-content: center;
-    width: 100%;
-
-}
-#gamesboard-container{
-    
-    display: flex;
-}
-  
-  .game-board {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(10, 1fr);
-    width: 300px;
-    height: 300px;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    background-color: #fff;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.24);
-    margin-right: 20px; /* Aggiungi lo spazio tra le griglie */
   }
   
-  .cell {
-    border: 0.2px solid rgba(0, 0, 0, 0.12);
+  .griglia-user {
+    width: 400px;
+  height: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: blue;
+  margin: 20px;
   }
   
-
-.option-container {
-    width: 300px;
-    height: 150px;
-    margin: 30px ;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff;
-    border: 2px solid #2196f3;
-    border-radius: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  }
-  
-.option-container:hover{
-    box-shadow: 0 0 10px rgba(0, 145, 255, 0.26);
-}
-
-.option-container .rotated {
-    transform: rotate(90deg);
-  }
-
-.nave1-preview{
-    background-color: firebrick;
-    width: 20px;
-    height: 10px;
-    margin: 3px;
-}
-.nave1-preview:hover{
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.nave2-preview{
-    background-color: red;
-    width: 30px;
-    height: 10px;
-    margin: 3px;
-    display: flex;
-}
-.nave2-preview:hover{
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-.nave3-preview{
-    background-color: chocolate;
+  .griglia div {
     width: 40px;
-    height: 10px;
-    margin: 3px;
-}
-.nave3-preview:hover{
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
+  height: 40px;
+  }
+  
+  .griglia-computer {
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: lightgreen;
+    margin: 20px;
+    
+  }
+  
+  .griglia-display {
+    width: 400px;
+    height: 400px;
+    margin: 20px;
+    background-color: yellow;
 
-.nave4-preview{
-    background-color: crimson;
-    width: 50px;
-    height: 10px;
-    margin: 3px;
-}
-.nave4-preview:hover{
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
 
-.nave5-preview{
-    background-color: darkorange;
-    width: 50px;
-    height: 10px;
-    margin: 3px;
-}
-.nave5-preview:hover{
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
+   /* width: 400px;
+    height: 400px;
+    margin: 20px;
+    background-color: #eeeeee;
+    border: 2px solid #0798ff;  Colore bordo giallo 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombra 
+    transition: box-shadow 0.3s ease; /* Effetto transizione ombra */
+  
+    /* Effetto ombra al passaggio del mouse 
+    &:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }*/
+  }
+  .naveuno-container {
+    width: 80px;
+    height: 40px;
+    background-color: orange;
+    margin: 10px;
+    display: flex;
+  }
+  
+  .naveuno-container-vertical {
+    width: 40px;
+    height: 80px;
+    background-color: orange;
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .navedue-container {
+    width: 120px;
+    height: 40px;
+    background-color: pink;
+    margin: 10px;
+    display: flex;
+  }
+  
+  .navedue-container-vertical {
+    width: 40px;
+    height: 120px;
+    background-color: pink;
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .navetre-container {
+    width: 120px;
+    height: 40px;
+    background-color:purple;  
+    margin: 10px;
+    display: flex;
+  }
+  
+  .navetre-container-vertical {
+    width: 40px;
+    height: 120px;
+    background-color: purple;
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .navequattro-container {
+    width: 160px;
+    height: 40px;
+    background-color:aqua;
+    margin: 10px;
+    display: flex;
+  }
+  
+  .navequattro-container-vertical {
+    width: 40px;
+    height: 160px;
+    background-color: aqua;
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    
+  }
+  
+  .navecinque-container {
+    width: 200px;
+    height: 40px;
+    background-color: green;
+    margin: 10px;
+    display: flex;
+  }
+  
+  .navecinque-container-vertical {
+    width: 40px;
+    height: 200px;
+    background-color: green;
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  
+  .nave div {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .naveuno {
+    background-color: orange;
+  }
+  
+  .navedue {
+    background-color: pink;
+  }
+  
+  .navetre {
+    background-color:purple;
+  }
+  
+  .navequattro {
+    background-color: aqua;
+  }
+  
+  .navecinque {
+    background-color: green;
+    
+  }
+  
+  .boom {
+    background-color: red;
+  
+  }
+  
+  
+  .miss {
+    background-color: black;
+  }
+  
