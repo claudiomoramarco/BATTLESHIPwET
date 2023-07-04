@@ -324,6 +324,7 @@ let navecinqueCount = 0
 
 function revealSquare(square) {
   if(!square.classList.contains('boom')) {
+    //aggiorna il conto delle navi colpite
     if (square.classList.contains('naveuno')) naveunoCount++
     if (square.classList.contains('navedue')) navedueCount++
     if (square.classList.contains('navetre')) navetreCount++
@@ -351,7 +352,8 @@ let cpuNavecinqueCount = 0
 function computerGo() {
   let random = Math.floor(Math.random() * userSquares.length);
   if (!userSquares[random].classList.contains('boom')) {
-    userSquares[random].classList.add('boom');
+    userSquares[random].classList.add('boom')
+    // Aggiorna il conteggio delle navi colpite dal computer
     if (userSquares[random].classList.contains('naveuno')) cpuNaveunoCount++;
     if (userSquares[random].classList.contains('navedue')) cpuNavedueCount++;
     if (userSquares[random].classList.contains('navetre')) cpuNavetreCount++;
@@ -365,9 +367,9 @@ function computerGo() {
   currentPlayer = 'user';
   turnDisplay.innerHTML = 'Your Go';
 
-  setTimeout(() => {
-    playGame(); // Chiamata ricorsiva ritardata
-  }, 1000);
+  //setTimeout(() => {
+   // playGame(); // Chiamata ricorsiva ritardataw
+ // }, 1000);
 }
 
 
