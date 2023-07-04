@@ -61,7 +61,6 @@ body {
 
 .navi{
     position:absolute;
-   
     transform: rotateY(180deg);
     pointer-events: none;
     opacity: .20;
@@ -88,7 +87,10 @@ body {
   
   .griglia div {
     width: 40px;
-  height: 40px;
+    height: 40px;
+     /* Colore di sfondo ispirato a Material Design */
+    border-radius: 5px; /* Bordi arrotondati Material Design */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3); /* Effetto ombra Material Design */
   }
   
   .griglia-computer {
@@ -96,115 +98,151 @@ body {
     height: 400px;
     display: flex;
     flex-wrap: wrap;
-    background-color: lightgreen;
+    background-color: #00FFC8; /* Colore di sfondo ispirato a Battaglia Navale */
     margin: 20px;
-    
+    border-radius: 8px; /* Bordi arrotondati Material Design */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Effetto ombra */
   }
+  
+
   
   .griglia-display {
     width: 400px;
-    height: 400px;
+    height: 800px;
     margin: 20px;
-    background-color: yellow;
-
-
-   /* width: 400px;
-    height: 400px;
+    background-color: #ffffff; /* Giallo Material Design */
+    border: 20px solid #FFC107; /* Colore bordo giallo scuro Material Design */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Effetto ombra Material Design */
+    transition: box-shadow 0.3s ease; /* Effetto transizione ombra Material Design */
     margin: 20px;
-    background-color: #eeeeee;
-    border: 2px solid #0798ff;  Colore bordo giallo 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombra 
-    transition: box-shadow 0.3s ease; /* Effetto transizione ombra */
-  
-    /* Effetto ombra al passaggio del mouse 
-    &:hover {
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }*/
+    border-radius: 8px; /* Bordi arrotondati Material Design */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Effetto ombra */
   }
+  
   .naveuno-container {
     width: 80px;
     height: 40px;
-    background-color: orange;
+    background-color: #FF9800; /* Colore arancione Material Design */
     margin: 10px;
     display: flex;
+    align-items: center; /* Centra il contenuto verticalmente */
+    justify-content: center; /* Centra il contenuto orizzontalmente */
+    border-radius: 4px; /* Bordi arrotondati Material Design */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Effetto ombra */
   }
+  
   
   .naveuno-container-vertical {
     width: 40px;
     height: 80px;
-    background-color: orange;
+       /* Colore arancione Material Design */
     margin: 10px;
     display: flex;
+    align-items: center; /* Centra il contenuto verticalmente */
+    justify-content: center; /* Centra il contenuto orizzontalmente */
     flex-wrap: wrap;
+    border-radius: 4px; /* Bordi arrotondati Material Design */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Effetto ombra */
   }
   
   .navedue-container {
     width: 120px;
     height: 40px;
-    background-color: pink;
-    margin: 10px;
-    display: flex;
+    background-color: #F44336; /* Colore rosso Material Design */
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   }
   
   .navedue-container-vertical {
     width: 40px;
     height: 120px;
-    background-color: pink;
-    margin: 10px;
-    display: flex;
-    flex-wrap: wrap;
+    background-color: #F44336;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   }
   
   .navetre-container {
     width: 120px;
     height: 40px;
-    background-color:purple;  
+    background-color: #9C27B0; /* Colore viola Material Design */
     margin: 10px;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   }
   
   .navetre-container-vertical {
     width: 40px;
     height: 120px;
-    background-color: purple;
+    background-color: #9C27B0;
     margin: 10px;
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   }
   
   .navequattro-container {
     width: 160px;
     height: 40px;
-    background-color:aqua;
+    background-color: #03A9F4; /* Colore blu Material Design */
     margin: 10px;
     display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   }
   
   .navequattro-container-vertical {
     width: 40px;
     height: 160px;
-    background-color: aqua;
+    background-color: #03A9F4;
     margin: 10px;
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
-    
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   }
   
   .navecinque-container {
     width: 200px;
-    height: 40px;
-    background-color: green;
-    margin: 10px;
-    display: flex;
+  height: 40px;
+  background-color: #4CAF50; /* Colore verde Material Design */
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   }
   
   .navecinque-container-vertical {
     width: 40px;
     height: 200px;
-    background-color: green;
-    margin: 10px;
-    display: flex;
-    flex-wrap: wrap;
+    background-color: #4CAF50;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   }
   
   
@@ -214,11 +252,12 @@ body {
   }
   
   .naveuno {
-    background-color: orange;
+    background-color: #FF9800;
+    
   }
   
   .navedue {
-    background-color: pink;
+    background-color: #9c0c01;
   }
   
   .navetre {
@@ -226,11 +265,11 @@ body {
   }
   
   .navequattro {
-    background-color: aqua;
+    background-color: #03A9F4;
   }
   
   .navecinque {
-    background-color: green;
+    background-color: #4CAF50 
     
   }
   
@@ -244,3 +283,6 @@ body {
     background-color: black;
   }
   
+  .naviselezionata {
+    display: none;
+  }

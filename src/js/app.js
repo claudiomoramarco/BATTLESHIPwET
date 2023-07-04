@@ -117,6 +117,8 @@ $(function() {
   let giocoFinito = false
   let currentPlayer = 'user'
   const width = 10
+ 
+  
   
   //crea board
   function createBoard(griglia, squares){
@@ -173,6 +175,7 @@ $(function() {
 
 
  //navi dell'avversario 
+ //Disponi le navi nella griglia dell'utente in modo casuale
  function generate(nave) {
   let randomDirection = Math.floor(Math.random() * nave.directions.length)
   let current = nave.directions[randomDirection]
@@ -243,7 +246,8 @@ navi.forEach(nave => nave.addEventListener('mousedown', (e) => {
 function dragStart() {
   draggedNave = this
   draggedNaveLength = this.childNodes.length
-  console.log(draggedNave)
+  //console.log(draggedNave)
+
 }
 
 function dragOver(e) {
@@ -259,9 +263,7 @@ function dragLeave() {
 }
 
 function dragDrop() {
-  if(draggedNave === null) {
-    return //Skip the code if draggedNave is null
-  }
+
   let naveNameWithLastId = draggedNave.lastChild.id
   let naveClass = naveNameWithLastId.slice(0,-2)
   console.log(naveClass)
@@ -276,21 +278,27 @@ function dragDrop() {
     selectedNaveIndex = parseInt(selectedNaveNameWithIndex.substr(-1))
     naveLastId = naveLastId - selectedNaveIndex
     console.log(naveLastId)
-    
+   
     if (orizzontale && !newNotAllowedOrizzontale.includes(naveLastId)){
       for (let i=0; i < draggedNaveLength; i++) {
+        
         userSquares[parseInt(this.dataset.id) - selectedNaveIndex + i].classList.add('taken', naveClass)
       }
       //quando metteremo la nave che stiamo draggando in un index non consentito ritornera sulla nostra griglia
       
     } else if (!orizzontale && !newNotAllowedVerticale.includes(naveLastId)) {
       for (let i=0; i < draggedNaveLength; i++) {
+       
         userSquares[parseInt(this.dataset.id) - selectedNaveIndex + width*i].classList.add('taken', naveClass)
       }
 
     } else return 
 
-    displayGriglia.removeChild(draggedNave)
+    
+    if (displayGriglia && draggedNave) {
+      displayGriglia.removeChild(draggedNave);
+    }
+    
 
 }
 
@@ -367,9 +375,7 @@ function computerGo() {
   currentPlayer = 'user';
   turnDisplay.innerHTML = 'Your Go';
 
-  //setTimeout(() => {
-   // playGame(); // Chiamata ricorsiva ritardataw
- // }, 1000);
+ 
 }
 
 
@@ -428,7 +434,7 @@ function checkForWins() {
 function giocoTerminato() {
   giocoFinito = true
   startButton.removeEventListener('click', playGame)
-
+  
 }
 
 })
