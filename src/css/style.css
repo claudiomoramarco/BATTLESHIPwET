@@ -104,6 +104,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Effetto ombra */
   }
   
+  
 
   
   .griglia-display {
@@ -283,6 +284,4 @@ body {
     background-color: black;
   }
   
-  .naviselezionata {
-    display: none;
-  }
+ 

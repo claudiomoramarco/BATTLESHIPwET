@@ -97,7 +97,7 @@ $(function() {
 
 
 //da qui battleship poi cambieremo il codice di sopra
-  document.addEventListener('DOMContentLoaded', () => { 
+document.addEventListener('DOMContentLoaded', () => { 
   const userGriglia = document.querySelector('.container .griglia-user')
   const computerGriglia = document.querySelector('.container .griglia-computer')
   const displayGriglia = document.querySelector('.container .griglia-display')
@@ -117,6 +117,10 @@ $(function() {
   let giocoFinito = false
   let currentPlayer = 'user'
   const width = 10
+  
+
+// Crea una variabile per tenere traccia del numero di navi posizionate
+let naviPosizionate = 0;
  
   
   
@@ -240,7 +244,7 @@ let draggedNaveLength
 
 navi.forEach(nave => nave.addEventListener('mousedown', (e) => {
   selectedNaveNameWithIndex = e.target.id
-  console.log(selectedNaveNameWithIndex)
+  //console.log(selectedNaveNameWithIndex)
 }))
 
 function dragStart() {
@@ -266,18 +270,20 @@ function dragDrop() {
 
   let naveNameWithLastId = draggedNave.lastChild.id
   let naveClass = naveNameWithLastId.slice(0,-2)
-  console.log(naveClass)
+  //console.log(naveClass)
   let lastNaveIndex = parseInt(naveNameWithLastId.substr(-1))
   let naveLastId = lastNaveIndex + parseInt(this.dataset.id)
-  console.log(naveLastId)
+ // console.log(naveLastId)
   const notAllowedOrizzontale = [0,10,20,30,40,50,60,70,80,90,1,11,21,31,41,51,61,71,81,91,2,22,32,42,52,62,72,82,92,3,13,23,33,43,53,63,73,83,93]
   const notAllowedVerticale = [99,98,97,96,95,94,93,92,91,90,89,88,87,86,85,84,83,82,81,80,79,78,77,76,75,74,73,72,71,70,69,68,67,66,65,64,63,62,61,60]
   
   let newNotAllowedOrizzontale = notAllowedOrizzontale.splice(0, 10 * lastNaveIndex)
   let newNotAllowedVerticale = notAllowedVerticale.splice(0, 10 * lastNaveIndex)
-    selectedNaveIndex = parseInt(selectedNaveNameWithIndex.substr(-1))
-    naveLastId = naveLastId - selectedNaveIndex
-    console.log(naveLastId)
+
+  selectedNaveIndex = parseInt(selectedNaveNameWithIndex.substr(-1))
+
+  naveLastId = naveLastId - selectedNaveIndex
+  //console.log(naveLastId)
    
     if (orizzontale && !newNotAllowedOrizzontale.includes(naveLastId)){
       for (let i=0; i < draggedNaveLength; i++) {
@@ -295,14 +301,17 @@ function dragDrop() {
     } else return 
 
     
-    if (displayGriglia && draggedNave) {
-      displayGriglia.removeChild(draggedNave);
-    }
+  displayGriglia.removeChild(draggedNave);
+    
     
 
 }
 
+
 function dragEnd(){
+  
+  // Rimuovi l'elemento della nave dalla griglia display
+  this.remove()
   console.log('dragend')
 }
 
@@ -311,13 +320,13 @@ function dragEnd(){
 function playGame() {
   if (giocoFinito) return
   if (currentPlayer === 'user') {
-    turnDisplay.innerHTML= 'Your Go'
+    turnDisplay.innerHTML= 'Il tuo turno'
     computerSquares.forEach(square => square.addEventListener('click', function(e) {
       revealSquare(square)
     }))
   }
   if (currentPlayer === 'computer') {
-    turnDisplay.innerHTML = 'Computer Go'
+    turnDisplay.innerHTML = 'Turno Avversario'
     setTimeout(computerGo,1000)
   }
 }
@@ -373,7 +382,7 @@ function computerGo() {
     return; // Aggiungi questa riga per terminare la funzione dopo la chiamata ricorsiva
   }
   currentPlayer = 'user';
-  turnDisplay.innerHTML = 'Your Go';
+  turnDisplay.innerHTML = 'Il tuo turno';
 
  
 }
