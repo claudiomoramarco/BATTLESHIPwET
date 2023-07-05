@@ -247,10 +247,14 @@ navi.forEach(nave => nave.addEventListener('mousedown', (e) => {
   //console.log(selectedNaveNameWithIndex)
 }))
 
-function dragStart() {
+function dragStart(event) {
   draggedNave = this
   draggedNaveLength = this.childNodes.length
   //console.log(draggedNave)
+  
+
+  event.target.setAttribute('draggable', 'false')
+  
 
 }
 
@@ -263,11 +267,12 @@ function dragEnter(e) {
 }
 
 function dragLeave() {
-  console.log('drag leave')
+  
+  //console.log('drag leave')
 }
 
 function dragDrop() {
-
+ //vedo se entra qui console.log('drag drop')
   let naveNameWithLastId = draggedNave.lastChild.id
   let naveClass = naveNameWithLastId.slice(0,-2)
   //console.log(naveClass)
@@ -300,10 +305,10 @@ function dragDrop() {
 
     } else return 
 
-    
-  displayGriglia.removeChild(draggedNave);
-    
-    
+    if (displayGriglia) {
+      displayGriglia.removeChild(draggedNave);
+    }
+      
 
 }
 
