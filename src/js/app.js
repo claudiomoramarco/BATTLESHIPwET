@@ -252,10 +252,11 @@ function dragStart(event) {
   draggedNaveLength = this.childNodes.length
   //console.log(draggedNave)
   
-
+  //Per rendere un elemento non trascinabile dopo essere stato trascinato una volta
+  //il metodo draggable dell'elemento e impostarlo su false
   event.target.setAttribute('draggable', 'false')
   
-
+  
 }
 
 function dragOver(e) {
@@ -302,22 +303,25 @@ function dragDrop() {
        
         userSquares[parseInt(this.dataset.id) - selectedNaveIndex + width*i].classList.add('taken', naveClass)
       }
-
+      
     } else return 
 
     if (displayGriglia) {
       displayGriglia.removeChild(draggedNave);
     }
-      
+    
+    draggedNave.style.display='none'
 
 }
 
 
-function dragEnd(){
-  
+function dragEnd(event){
+
+  //console.log('dragend')
   // Rimuovi l'elemento della nave dalla griglia display
-  this.remove()
-  console.log('dragend')
+
+  //console.log('dragend')
+
 }
 
 
