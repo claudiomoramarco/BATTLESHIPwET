@@ -254,7 +254,7 @@ function dragStart(event) {
   
   //Per rendere un elemento non trascinabile dopo essere stato trascinato una volta
   //il metodo draggable dell'elemento e impostarlo su false
-  event.target.setAttribute('draggable', 'false')
+  //event.target.setAttribute('draggable', 'false')
   
   
 }
