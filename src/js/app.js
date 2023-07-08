@@ -117,13 +117,41 @@ document.addEventListener('DOMContentLoaded', () => {
   let giocoFinito = false
   let currentPlayer = 'user'
   const width = 10
+
+
+  //mod di gioco
+  let modalitaDiGioco = ""
+  let numeroGiocatori = 0
+  //per verificare se un player è pronto o meno
+  let giocatorePronto = false
+  let nemicoPronto = false
+
+  //come vedo se le navi sono state posizionate correttamente e pronte, prima che la partita inizi
+  let naviPiazzate = false
+
+  //teniamo traccia dei colpi
+  let colpo = -1
+
+
+//da qui la parte di socket io per il multiplayer
+
+const socket = io()
+
+
+//dobbiamo tenere traccia dei due multiplayer
+//numero giocatori
+
+socket.on('numero-player', num => {
+
+  if (num == -1) {
+
+    infoDisplay.innerHTML = "server pieno"
+
+  }
+})
   
 
-// Crea una variabile per tenere traccia del numero di navi posizionate
-let naviPosizionate = 0;
- 
-  
-  
+
   //crea board
   function createBoard(griglia, squares){
     for(let i = 0; i < width*width;i++){
