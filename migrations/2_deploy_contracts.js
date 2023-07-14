@@ -1,5 +1,5 @@
-const Battleship = artifacts.require("Battleships");
+var Battleship = artifacts.require("Battleship");
 
-module.exports = async function (deployer) {
-    await deployer.deploy(Battleship);
+module.exports = function (deployer) {
+     deployer.deploy(Battleship);
 };

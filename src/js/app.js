@@ -1,158 +1,186 @@
-/*App = {  //global app oggetto per la nostra applicazione,carica il pet data in un init e poi chiama la funzione initweb3()
+const TruffleContract = require('truffle-contract')
+
+App = {
+
   web3Provider: null,
   contracts: {},
-  
+  informazioni: null,
+
   init: async function() {
-    // Load pets.
-    $.getJSON('../pets.json', function(data) {
-      var petsRow = $('#petsRow');
-      var petTemplate = $('#petTemplate');
-
-      for (i = 0; i < data.lenght; i ++) {
-        petTemplate.find('.panel-title').text(data[i].name);
-        petTemplate.find('img').attr('src', data[i].picture);
-        petTemplate.find('.pet-breed').text(data[i].breed);
-        petTemplate.find('.pet-age').text(data[i].age);
-        petTemplate.find('.pet-location').text(data[i].location);
-        petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
-
-        petsRow.append(petTemplate.html());
-      }
-    });
-
     return await App.initWeb3();
   },
 
-  initWeb3: async function() {
-  // Modern dapp browsers...
-if (window.ethereum) {
-  App.web3Provider = window.ethereum;
-  try {
-    // Request account access
-    await window.ethereum.enable();
-  } catch (error) {
-    // User denied account access...
-    console.error("User denied account access")
-  }
-}
-// Legacy dapp browsers...
-else if (window.web3) {
-  App.web3Provider = window.web3.currentProvider;
-}
-// If no injected web3 instance is detected, fall back to Ganache
-else {
-  App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
-}
-web3 = new Web3(App.web3Provider);
+  initWeb3: async function () { 
 
+    if(window.ethereum) {
+      App.web3Provider = window.ethereum;
+      try {
+        // Request account access
+        await window.ethereum.enable();
+      } catch (error) {
+        // User denied account access
+        console.error("User denied account access")
+
+      }
+    }
+    else if (window.web3) {
+      App.web3Provider = window.web3.currentProvider;
+    }
+    // Legacy dapp browsers...
+    else {
+      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
+    }d
+    web3 = new Web3(App.web3Provider);
+    web3.eth.defaultAccount = web3.eth.accounts[0];
     return App.initContract();
   },
 
-  initContract: function() {
-    $.getJSON('Battleship.json', function(data) {
-      // Get the necessary contract artifact file and instantiate it with @truffle/contract
-      var AdoptionArtifact = data;
-      App.contracts.Adoption = TruffleContract(AdoptionArtifact);
-    
-      // Set the provider for our contract
+  
+  initContract:function()  {
+
+    $.getJSON("Battleship.json", function(data) {
+      var BattleshipArtifact = data; //prendi il contratto e inizializzalo
+      App.contracts.Battleship = TruffleContract(BattleshipArtifact);
       App.contracts.Battleship.setProvider(App.web3Provider);
-    
-      // Use our contract to retrieve and mark the adopted pets
-      return App.markAdopted();
-    });
-    
+    })
 
-    return App.bindEvents();
+    return App.bindEvents()
+
   },
 
-  bindEvents: function() {
-    $(document).on('click', '.btn-adopt', App.handleAdopt);
-  },
+  bindEvents : async function() {
 
-  markAdopted: function() {
-    /*
-     * Replace me...
-     */
-  /*}
+    //qui dobbiamo fare la creazione del gioco con id e delle board
+    $(document).on('click', '.nave', App.handleNaveClick);
+    
+  }
+}
 
-  handleAdopt: function(event) {
-    event.preventDefault();
 
-    var petId = parseInt($(event.target).data('id'));
 
-    /*
-     * Replace me...
-     */
-/*  }
-
-};
-
-$(function() {
-  $(window).load(function() {
-    App.init();
-  });
-});
-*/
 
 
 
 //da qui battleship poi cambieremo il codice di sopra
 document.addEventListener('DOMContentLoaded', () => { 
+  //per le navi
+  
+  $(document).on ('click', '.nave', App.handleNaveClick)
+  
   const userGriglia = document.querySelector('.container .griglia-user')
-  const computerGriglia = document.querySelector('.container .griglia-computer')
+  //for the users
+  const enemyGriglia = document.querySelector('.container .griglia-enemy')
   const displayGriglia = document.querySelector('.container .griglia-display')
+  //ships definitions
   const navi = document.querySelectorAll('.nave')
   const naveuno = document.querySelector('.naveuno-container')
   const navedue = document.querySelector('.navedue-container')
   const navetre = document.querySelector('.navetre-container')
   const navequattro = document.querySelector('.navequattro-container')
   const navecinque = document.querySelector('.navecinque-container')
-  const startButton = document.querySelector('#start')
-  const rotateButton = document.querySelector('#rotate')
+  //for the starting point
+  $(document).on('click', '#start', App.playGame)
+  $(document).on('click', '#rotate', App.rotate)
+
+
+  $(document).on('click')
   const turnDisplay = document.querySelector('#whose-go')
+
   const infoDisplay = document.querySelector('#info')
+  //button per il Multiplayer e per ogni player
+  
+  const multiplayerButton = document.querySelector('#multiplayerBottone')
+
+  
+  //user and enemy squares
   const userSquares=[]
-  const computerSquares=[]
+  const enemySquares=[]
+  //game definitions
   let orizzontale = true
   let giocoFinito = false
+
   let currentPlayer = 'user'
+  //definition of static board game
   const width = 10
 
 
-  //mod di gioco
-  let modalitaDiGioco = ""
-  let numeroGiocatori = 0
+  
+  //qui possiamo implementare che i giocatori del contratto sono solo due, poi si vedrà
+  let numeroGiocatore = 0
+
   //per verificare se un player è pronto o meno
-  let giocatorePronto = false
+  let userPronto = false
+  //verifico che nemico is ready
   let nemicoPronto = false
 
   //come vedo se le navi sono state posizionate correttamente e pronte, prima che la partita inizi
   let naviPiazzate = false
 
-  //teniamo traccia dei colpi
+  //teniamo traccia del colpo
   let colpo = -1
 
 
-//da qui la parte di socket io per il multiplayer
 
-const socket = io()
+  //listener per i bottoni delle modalità di gioco
+  multiplayerButton.addEventListener('click',iniziaMultiplayer)
 
+  //data trasmetto da socke io è string e passiamo come num 
+  //e se player numero uguale a 1 allora player attuale = enemy 
 
-//dobbiamo tenere traccia dei due multiplayer
-//numero giocatori
+  //modalità Multi
+  //se prendo multiplayer, inizio la gamemode multi, e inizio la socket connect e listen per il num dei player
 
-socket.on('numero-player', num => {
-
-  if (num == -1) {
-
-    infoDisplay.innerHTML = "server pieno"
-
-  }
-})
+  function iniziaMultiplayer(){
   
+    function giocatoreConnessoDisconnesso(num){
+      document.querySelector(`${giocatore}.connected span`).classList.toggle('green')
+      if(parseInt(num) == numeroGiocatore) document.querySelector(giocatore).style.fontWeight = 'bold'
+    }
+  }
+ 
 
+
+//giocatori sono pronti per giocare
+startButton.addEventListener('click', () => {
+  playGameMulti
+})
+
+  //ready button 
+  startButton.addEventListener('click', () => {
+    if(naviPiazzate)
+      playGame
+  })
+    
+  
+  //submitting the attack
+  userSquares.forEach(square => {
+    square.addEventListener('click', () => {
+      if(currentPlayer == 'user' && nemicoPronto) {
+        colpo = square.dataset.id
+      }
+    })
+  })
+
+
+
+  //funzione sing player
+ /* function iniziaSingolo(){
+    modalitaDiGioco = "giocatoreSingolo"
+
+  generate(naveArray[0])
+  generate(naveArray[1])
+  generate(naveArray[2])
+  generate(naveArray[3])
+  generate(naveArray[4])
+
+
+  startButton.addEventListener('click', playGame)
+
+  } */
 
   //crea board
+  // a questa le diamo un Id cosi per il multiplayer si 
+  //puo collegare con l id della board nemica
   function createBoard(griglia, squares){
     for(let i = 0; i < width*width;i++){
       const square = document.createElement('div')
@@ -163,7 +191,7 @@ socket.on('numero-player', num => {
   }
 
   createBoard(userGriglia, userSquares)
-  createBoard(computerGriglia, computerSquares)
+  createBoard(enemyGriglia, enemySquares)
 
   //navi 
   const naveArray = [
@@ -213,21 +241,19 @@ socket.on('numero-player', num => {
   let current = nave.directions[randomDirection]
   if (randomDirection === 0) direction = 1
   if (randomDirection === 1) direction = 10
-  let randomStart = Math.abs(Math.floor(Math.random() * computerSquares.length - (nave.directions[0].length * direction)))
+  let randomStart = Math.abs(Math.floor(Math.random() * enemySquares.length - (nave.directions[0].length * direction)))
 
-  const isTaken = current.some(index => computerSquares[randomStart + index].classList.contains('taken'))
+  const isTaken = current.some(index => enemySquares[randomStart + index].classList.contains('taken'))
   const isAtRightEdge = current.some(index => (randomStart + index) % width === width - 1)
   const isAtLeftEdge = current.some(index => (randomStart + index) % width === 0)
 
-  if (!isTaken && !isAtRightEdge && !isAtLeftEdge) current.forEach(index => computerSquares[randomStart + index].classList.add('taken', nave.name))
+  if (!isTaken && !isAtRightEdge && !isAtLeftEdge) current.forEach(index => enemySquares[randomStart + index].classList.add('taken', nave.name))
 
   else generate(nave)
 }
-generate(naveArray[0])
-generate(naveArray[1])
-generate(naveArray[2])
-generate(naveArray[3])
-generate(naveArray[4])
+
+//qui pc genera le navi automaticamente,
+//ma noi vogliamo che funzioni solo in giocatore singolo
 
 
 // rotazione nella board delle navi 
@@ -336,6 +362,7 @@ function dragDrop() {
 
     if (displayGriglia) {
       displayGriglia.removeChild(draggedNave);
+      if(!displayGriglia.querySelector('.nave')) naviPiazzate = true
     }
     
     draggedNave.style.display='none'
@@ -358,16 +385,35 @@ function playGame() {
   if (giocoFinito) return
   if (currentPlayer === 'user') {
     turnDisplay.innerHTML= 'Il tuo turno'
-    computerSquares.forEach(square => square.addEventListener('click', function(e) {
+    enemySquares.forEach(square => square.addEventListener('click', function(e) {
       revealSquare(square)
     }))
   }
-  if (currentPlayer === 'computer') {
+
+  //da fare sempre con web3
+  if (currentPlayer === 'enemy') {
     turnDisplay.innerHTML = 'Turno Avversario'
-    setTimeout(computerGo,1000)
+    setTimeout(enemyGo,1000)
   }
 }
-startButton.addEventListener('click', playGame)
+
+
+
+
+function playGame() {
+  if(giocofinito) return;
+  if(currentPlayer === 'user') {
+    turnDisplay.text('Il tuo turno')
+    enemySquares.on('click', function() {
+      revealSquare($(this))
+    })
+  }
+}
+
+if(currentPlayer === 'enemy') {
+  turnDisplay.text('Turno Avversario')
+  setTimeout(enemyGo,1000)
+}
 
 
 let naveunoCount = 0
@@ -393,7 +439,7 @@ function revealSquare(square) {
   
   }
   checkForWins()
-  currentPlayer = 'computer'
+  currentPlayer = 'enemy'
   playGame()
 }
 
@@ -403,11 +449,11 @@ let cpuNavetreCount = 0
 let cpuNavequattroCount = 0
 let cpuNavecinqueCount = 0
 
-function computerGo() {
-  let random = Math.floor(Math.random() * userSquares.length);
+/*function enemyGo() {
+  let random = Math.floor(Math.rcpuandom() * userSquares.length);
   if (!userSquares[random].classList.contains('boom')) {
     userSquares[random].classList.add('boom')
-    // Aggiorna il conteggio delle navi colpite dal computer
+    // Aggiorna il conteggio delle navi colpite dal enemy
     if (userSquares[random].classList.contains('naveuno')) cpuNaveunoCount++;
     if (userSquares[random].classList.contains('navedue')) cpuNavedueCount++;
     if (userSquares[random].classList.contains('navetre')) cpuNavetreCount++;
@@ -415,55 +461,57 @@ function computerGo() {
     if (userSquares[random].classList.contains('navecinque')) cpuNavecinqueCount++;
     checkForWins();
   } else {
-    computerGo();
+    enemyGo();
     return; // Aggiungi questa riga per terminare la funzione dopo la chiamata ricorsiva
   }
   currentPlayer = 'user';
   turnDisplay.innerHTML = 'Il tuo turno';
 
  
-}
+} */
 
 
 function checkForWins() {
   if(naveunoCount === 2) {
-    infoDisplay.innerHTML = 'Hai affondato la Nave1 del computer'
+    infoDisplay.innerHTML = 'Hai affondato la Nave1 del enemy'
     naveunoCount = 10
   }
   if(navedueCount === 3) {
-    infoDisplay.innerHTML = 'Hai affondato la Nave2 del computer'
+    infoDisplay.innerHTML = 'Hai affondato la Nave2 del enemy'
     navedueCount = 10
   }
   if(navetreCount === 3) {
-    infoDisplay.innerHTML = 'Hai affondato la Nave3 del computer'
+    infoDisplay.innerHTML = 'Hai affondato la Nave3 del enemy'
     navetreCount = 10
   }
   if(navequattroCount === 4) {
-    infoDisplay.innerHTML = 'Hai affondato la Nave4 del computer'
+    infoDisplay.innerHTML = 'Hai affondato la Nave4 del enemy'
     navequattroCount = 10
   }
   if(navecinqueCount === 5) {
-    infoDisplay.innerHTML = 'Hai affondato la Nave5 del computer'
+    infoDisplay.innerHTML = 'Hai affondato la Nave5 del enemy'
     navecinqueCount = 10
   }
+  //dovrebbero essere le navi amiche che dobbiamo rivedere con enemy
+  /*
   if(cpuNaveunoCount === 2) {
-    infoDisplay.innerHTML = 'Hai affondato la Nave1 del computer'
+    infoDisplay.innerHTML = 'Hai affondato la Nave1 del enemy'
     cpuNaveunoCount = 10
   }
   if(cpuNavedueCount === 3) {
-    infoDisplay.innerHTML = 'Hai affondato la Nave2 del computer'
+    infoDisplay.innerHTML = 'Hai affondato la Nave2 del enemy'
     cpuNavedueCount = 10
   }
   if(cpuNavetreCount === 3) {
-    infoDisplay.innerHTML = 'Hai affondato la Nave3 del computer'
+    infoDisplay.innerHTML = 'Hai affondato la Nave3 del enemy'
     cpuNavetreCount = 10
   }
   if(cpuNavequattroCount === 4) {
-    infoDisplay.innerHTML = 'Hai affondato la Nave4 del computer'
+    infoDisplay.innerHTML = 'Hai affondato la Nave4 del enemy'
     cpuNavequattroCount = 10
   }
   if(cpuNavecinqueCount === 5) {
-    infoDisplay.innerHTML = 'Hai affondato la Nave5 del computer'
+    infoDisplay.innerHTML = 'Hai affondato la Nave5 del enemy'
     cpuNavecinqueCount = 10
   }
   if ((naveunoCount + navedueCount + navetreCount + navequattroCount + navecinqueCount) === 50 ) {
@@ -472,10 +520,12 @@ function checkForWins() {
     
   }
 
+
   if ((cpuNaveunoCount + cpuNavedueCount + cpuNavetreCount + cpuNavequattroCount + cpuNavecinqueCount) === 50 ) {
     infoDisplay.innerHTML = 'Hai perso, ha vinto il pc'
     giocoTerminato()
-  } 
+  } */
+
 }
 function giocoTerminato() {
   giocoFinito = true
@@ -483,4 +533,11 @@ function giocoTerminato() {
   
 }
 
-})
+});
+
+
+$(function() {
+  $(window).load(function() {
+    App.init();
+  });
+});
